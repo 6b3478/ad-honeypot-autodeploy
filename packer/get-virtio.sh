@@ -10,7 +10,7 @@ if ! cd virtio; then
 fi
 
 echo "[*] Downloading stable virtio-win.iso..."
-wget https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/virtio-win.iso
+wget -c https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/virtio-win.iso
 
 echo "[*] Extracting iso..."
 mkdir virtio-win
