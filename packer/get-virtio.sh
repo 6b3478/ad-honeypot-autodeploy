@@ -1,6 +1,12 @@
 #!/bin/bash
 #
 
+_dn () {
+        [[ -n $2 ]] && OF="-o $2"  || OF="--content-disposition-default-utf8=true" 
+        aria2c --summary-interval=0 --optimize-concurrent-downloads=true -c -x 16 -j 64 -s 64 \
+        --truncate-console-readout=true $OF --log - --log-level=notice --stderr=true "$1" 2>&1
+}
+
 echo "[*] Cleaning up & init virtio folder..."
 rm -fr virtio
 mkdir virtio
@@ -10,7 +16,7 @@ if ! cd virtio; then
 fi
 
 echo "[*] Downloading stable virtio-win.iso..."
-wget -c https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/virtio-win.iso
+_dn https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/virtio-win.iso
 
 echo "[*] Extracting iso..."
 mkdir virtio-win
